@@ -38,7 +38,7 @@ public class SwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.
-				basePackage("com.everis.alicante.courses.beca.summer17.friensnet.controller")).
+				basePackage("com.everis.alicante.courses.beca.summer17.friendsnet.controller")).
 				paths(PathSelectors.any()).build().apiInfo(apiInfo());
 	}
 
@@ -52,7 +52,7 @@ public class SwaggerConfig {
 		ApiInfo apiInfo = new ApiInfo("Sample Application REST API",
 				"The API exposes commom functionallities to manage the FriendsNet",
 				"API TOS",
-				"Terms of service","ginxaco@gmail.com", "License of API",
+				"Terms of service","fenixaragog@gmail.com", "License of API",
 				"API license URL");
 		return apiInfo;
 	}
