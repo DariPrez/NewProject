@@ -1,8 +1,8 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.manager;
-
 import java.io.Serializable;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.FNEntity;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.Person;
 
 public interface Manager<E extends FNEntity, ID extends Serializable> {
 
@@ -18,6 +18,6 @@ public interface Manager<E extends FNEntity, ID extends Serializable> {
 	
 	Iterable<E> update(Iterable<E> es);
 	
-	ID remove(ID id);
+	void remove(Person person);
 
 }

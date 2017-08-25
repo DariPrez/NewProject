@@ -9,10 +9,12 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.dao.interfaces.EntityDAO;
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.FNEntity;
 
+@Transactional
 public abstract class AbstractDAO<E extends FNEntity, ID extends Serializable> implements EntityDAO<E, ID>{
 
 	private final Class<E> persistentClass;
@@ -64,9 +66,8 @@ public abstract class AbstractDAO<E extends FNEntity, ID extends Serializable> i
 		return es;
 	}
 	
-	public ID remove(ID id) {
-		entityManager.remove(id);
-		return id;
+	public void remove(E e) {
+		entityManager.remove(e);
 	}
 	
 	

@@ -18,6 +18,6 @@ public interface EntityDAO<E extends FNEntity, ID extends Serializable> {
 	
 	Iterable<E> update(Iterable<E> es);
 	
-	ID remove (ID id);
+	void remove (E e);
 	
 }

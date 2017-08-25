@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,28 +24,27 @@ public class PersonController{
 	
 	@GetMapping
 	public Iterable<Person> getAll() {
-		return manager.findAll();
+		return this.manager.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public Person getById(@RequestParam Long id) {
-		return manager.findById(id);
+	public Person getById(@PathVariable Long id) {
+		return this.manager.findById(id);
 	}
 
 	@PostMapping
 	public Person create(@RequestBody Person e) {
-		return manager.save(e);
+		return this.manager.save(e);
 	}
 
 	@PostMapping("/{id}/relate")
-	public Person relatePersons(@RequestParam Long id,@RequestBody List<Person> persons) {
+	public Person relatePersons(@PathVariable Long id,@RequestBody List<Person> persons) {
 		return null;
 	}
 	
 	@DeleteMapping("/{id}")
-	public Long remove(@RequestParam Long id) {
-		return manager.remove(id);
+	public void remove(@PathVariable Long id) {
+		this.manager.remove(manager.findById(id));
 	}
-
 
 }

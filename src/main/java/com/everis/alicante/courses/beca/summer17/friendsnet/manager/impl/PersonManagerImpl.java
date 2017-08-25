@@ -46,12 +46,12 @@ public class PersonManagerImpl implements PersonManager {
 	}
 
 	@Override
-	public Long remove(Long id) {
-		return personDao.remove(id);
+	public void remove(Person person) {
+		personDao.remove(person);
 	}
 
 	@Override
-	public Person relatePersons(Long id, List<Long> persons) {
+	public Person relatePersons(Long id, List<Person> persons) {
 		// TODO Auto-generated method stub
 		return null;
 	}
