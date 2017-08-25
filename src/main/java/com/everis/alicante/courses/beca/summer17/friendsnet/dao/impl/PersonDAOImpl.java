@@ -13,7 +13,7 @@ public class PersonDAOImpl extends AbstractDAO<Person, Long> implements PersonDA
 
 	@Override
 	public Person relatePerson(Long id, List<Person> persons) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

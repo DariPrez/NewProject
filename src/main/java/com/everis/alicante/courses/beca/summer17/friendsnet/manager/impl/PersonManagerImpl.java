@@ -24,6 +24,11 @@ public class PersonManagerImpl implements PersonManager {
 	public Person findById(Long id) {
 		return personDao.findById(id);
 	}
+	
+//	@Override
+//	public Iterable<ID> findByIds(Iterable<ID> ids) {
+//		return personDao.findById(id);
+//	}
 
 	@Override
 	public Person save(Person e) {

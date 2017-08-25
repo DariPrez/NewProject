@@ -18,6 +18,6 @@ public interface Manager<E extends FNEntity, ID extends Serializable> {
 	
 	Iterable<E> update(Iterable<E> es);
 	
-	void remove(Person person);
+	void remove(E e);
 
 }

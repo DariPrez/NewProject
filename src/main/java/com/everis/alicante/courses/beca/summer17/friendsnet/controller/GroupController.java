@@ -11,32 +11,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.Person;
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.PersonGroup;
-import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.PersonManager;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.Person;
+import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.GroupManager;
 
 @RestController
-@RequestMapping("/person")
-public class PersonController{
+@RequestMapping("/group")
+public class GroupController{
 	
 	@Autowired
-	private PersonManager manager;
+	private GroupManager groupManager;
 	
 	@GetMapping
-	public Iterable<Person> getAll() {
-		return this.manager.findAll();
+	public Iterable<PersonGroup> getAll() {
+		return this.groupManager.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public Person getById(@PathVariable Long id) {
-		return this.manager.findById(id);
+	public PersonGroup getById(@PathVariable Long id) {
+		return this.groupManager.findById(id);
 	}
 
 	@PostMapping
-	public Person create(@RequestBody Person e) {
-		return this.manager.save(e);
+	public PersonGroup create(@RequestBody PersonGroup e) {
+		return this.groupManager.save(e);
 	}
-
+	
+	@GetMapping("/{idperson}")
+	public PersonGroup getByPersonId(@PathVariable Long id) {
+		return null;
+	}
+	
 	@PostMapping("/{id}/relate")
 	public Person relatePersons(@PathVariable Long id,@RequestBody List<Person> persons) {
 		return null;
@@ -44,7 +49,7 @@ public class PersonController{
 	
 	@DeleteMapping("/{id}")
 	public void remove(@PathVariable Long id) {
-		this.manager.remove(manager.findById(id));
+		this.groupManager.remove(groupManager.findById(id));
 	}
 
 }
