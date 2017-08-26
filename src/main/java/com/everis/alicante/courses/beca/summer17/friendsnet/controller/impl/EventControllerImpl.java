@@ -1,4 +1,4 @@
-package com.everis.alicante.courses.beca.summer17.friendsnet.controller;
+package com.everis.alicante.courses.beca.summer17.friendsnet.controller.impl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.controller.interfaces.EventController;
-import com.everis.alicante.courses.beca.summer17.friendsnet.controller.interfaces.GroupController;
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Event;
 import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.EventManager;
 

@@ -1,4 +1,4 @@
-package com.everis.alicante.courses.beca.summer17.friendsnet.controller;
+package com.everis.alicante.courses.beca.summer17.friendsnet.controller.impl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

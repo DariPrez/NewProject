@@ -55,8 +55,5 @@ public class Event implements FNEntity{
 	@Column(nullable = false)
 	private byte[] picture;
 
-//	@ManyToOne(cascade = { CascadeType.MERGE })
-//	@JoinColumn(name = "id", nullable = false)
-//	private Person person;
 
 }
