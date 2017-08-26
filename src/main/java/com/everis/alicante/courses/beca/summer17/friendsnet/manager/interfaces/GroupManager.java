@@ -1,11 +1,11 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.PersonGroup;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Group;
 import com.everis.alicante.courses.beca.summer17.friendsnet.manager.Manager;
 
-public interface GroupManager extends Manager<PersonGroup, Long> {
+public interface GroupManager extends Manager<Group, Long> {
 
-	PersonGroup addPersons(Iterable<Person> persons);
+	Group addPersons(Iterable<Person> persons);
 
 }

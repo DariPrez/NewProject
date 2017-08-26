@@ -1,4 +1,4 @@
-package com.everis.alicante.courses.beca.summer17.friendsnet.dao.interfaces;
+package com.everis.alicante.courses.beca.summer17.friendsnet.dao;
 
 import java.io.Serializable;
 

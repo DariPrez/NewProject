@@ -1,5 +1,7 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.entity;
 
+import java.util.Set;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +14,7 @@ public class PersonTest {
 	private Long expectedId = (long) 123;
 	private String expectedName = "";
 	private String expectedSurname = "";
+	private Set<Person> expectedPersons = null;
 	private byte[] expectedPicture = null;
 	
 	@Before
@@ -20,6 +23,7 @@ public class PersonTest {
 		this.expectedPerson.setId(expectedId);
 		this.expectedPerson.setName(expectedName);
 		this.expectedPerson.setSurname(expectedSurname);
+		this.expectedPerson.setPersons(expectedPersons);
 		this.expectedPerson.setPicture(expectedPicture);
 		}
 	
@@ -99,6 +103,24 @@ public class PersonTest {
 		person.setPicture(expectedPicture);
 		// Assert
 		Assert.assertEquals(expectedPicture, person.getPicture());
+	}
+	
+	@Test
+	public void testGetPersons() {
+		// Act
+		final Set<Person> result = this.expectedPerson.getPersons();
+		// Assert
+		Assert.assertEquals(expectedPersons, result);
+	}
+	
+	@Test
+	public void testSetPersons() {
+		// Arrange
+		final Person person = new Person();
+		// Act
+		person.setPersons(expectedPersons);
+		// Assert
+		Assert.assertEquals(expectedPersons, person.getPersons());
 	}
 	
 }

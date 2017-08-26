@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.controller.interfaces.GroupController;
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.PersonGroup;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Group;
 import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.GroupManager;
 import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.PersonManager;
 
@@ -27,22 +27,22 @@ public class GroupControllerImpl implements GroupController{
 	private PersonManager personManager;
 	
 	@GetMapping
-	public Iterable<PersonGroup> getAll() {
+	public Iterable<Group> getAll() {
 		return this.groupManager.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public PersonGroup getById(@PathVariable Long id) {
+	public Group getById(@PathVariable Long id) {
 		return this.groupManager.findById(id);
 	}
 
 	@PostMapping
-	public PersonGroup create(@RequestBody PersonGroup e) {
+	public Group create(@RequestBody Group e) {
 		return this.groupManager.save(e);
 	}
 	
 	@GetMapping("/person/{id}")
-	public PersonGroup getByPersonId(@PathVariable Long id) {
+	public Group getByPersonId(@PathVariable Long id) {
 		return null;
 	}
 	

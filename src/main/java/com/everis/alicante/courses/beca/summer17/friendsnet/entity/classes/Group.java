@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "PersonGroup")
-public class PersonGroup implements FNEntity{
+public class Group implements FNEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

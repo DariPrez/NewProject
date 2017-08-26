@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.dao.interfaces.GroupDAO;
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.PersonGroup;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Group;
 import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.GroupManager;
 
 @Service
@@ -15,42 +15,42 @@ public class GroupManagerImpl implements GroupManager {
 	private GroupDAO groupDao;
 	
 	@Override
-	public Iterable<PersonGroup> findAll() {
+	public Iterable<Group> findAll() {
 		return groupDao.findAll();
 	}
 
 	@Override
-	public PersonGroup findById(Long id) {
+	public Group findById(Long id) {
 		return groupDao.findById(id);
 	}
 
 	@Override
-	public PersonGroup save(PersonGroup e) {
+	public Group save(Group e) {
 		return groupDao.save(e);
 	}
 
 	@Override
-	public Iterable<PersonGroup> save(Iterable<PersonGroup> es) {
+	public Iterable<Group> save(Iterable<Group> es) {
 		return groupDao.save(es);
 	}
 
 	@Override
-	public PersonGroup update(PersonGroup e) {
+	public Group update(Group e) {
 		return groupDao.update(e);
 	}
 
 	@Override
-	public Iterable<PersonGroup> update(Iterable<PersonGroup> es) {
+	public Iterable<Group> update(Iterable<Group> es) {
 		return groupDao.update(es);
 	}
 
 	@Override
-	public void remove(PersonGroup group) {
+	public void remove(Group group) {
 		groupDao.remove(group);
 	}
 
 	@Override
-	public PersonGroup addPersons(Iterable<Person> persons) {
+	public Group addPersons(Iterable<Person> persons) {
 		// TODO Auto-generated method stub
 		return null;
 	}

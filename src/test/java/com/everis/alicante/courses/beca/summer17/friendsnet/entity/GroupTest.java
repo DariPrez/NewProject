@@ -4,19 +4,19 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.PersonGroup;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Group;
 
 
 public class GroupTest {
 
-	private PersonGroup expectedGroup;
+	private Group expectedGroup;
 	private Long expectedId = (long) 123;
 	private String expectedName = "";
 	private byte[] expectedPicture = null;
 	
 	@Before
 	public void init() {
-		this.expectedGroup = new PersonGroup();
+		this.expectedGroup = new Group();
 		this.expectedGroup.setId(expectedId);
 		this.expectedGroup.setName(expectedName);
 		this.expectedGroup.setPicture(expectedPicture);
@@ -39,7 +39,7 @@ public class GroupTest {
 	@Test
 	public void testSetId() {
 		// Arrange
-		final PersonGroup group = new PersonGroup();
+		final Group group = new Group();
 		// Act
 		group.setId(expectedId);
 		// Assert
@@ -57,7 +57,7 @@ public class GroupTest {
 	@Test
 	public void testSetName() {
 		// Arrange
-		final PersonGroup group = new PersonGroup();
+		final Group group = new Group();
 		// Act
 		group.setName(expectedName);
 		// Assert
@@ -75,7 +75,7 @@ public class GroupTest {
 	@Test
 	public void testSetPicture() {
 		// Arrange
-		final PersonGroup group = new PersonGroup();
+		final Group group = new Group();
 		// Act
 		group.setPicture(expectedPicture);
 		// Assert

@@ -25,8 +25,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Like")
-public class PersonLike implements FNEntity{
+@Table(name = "PersonLike")
+public class Like implements FNEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

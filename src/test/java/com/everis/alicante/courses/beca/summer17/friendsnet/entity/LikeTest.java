@@ -6,39 +6,34 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Post;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.enums.PostType;
-
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Like;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.enums.LikeType;
 
 public class LikeTest {
 
-	private Post expectedPost;
+	private Like expectedLike;
 	private Long expectedId = (long) 123;
-	private String expectedText = "";
 	private Date expectedCreationDate = null;
-	private PostType expectedType = PostType.BIOGRAPHY;
-	private byte[] expectedPicture = null;
+	private LikeType expectedType = LikeType.COOL;
 	
 	@Before
 	public void init() {
-		this.expectedPost = new Post();
-		this.expectedPost.setId(expectedId);
-		this.expectedPost.setText(expectedText);
-		this.expectedPost.setCreationDate(expectedCreationDate);
-		this.expectedPost.setType(expectedType);
-		this.expectedPost.setPicture(expectedPicture);
+		this.expectedLike = new Like();
+		this.expectedLike.setId(expectedId);
+		this.expectedLike.setCreationDate(expectedCreationDate);
+		this.expectedLike.setType(expectedType);
 		}
 	
 	@Test
-	public void testPost() {
+	public void testLike() {
 		// Assert
-		Assert.assertNotNull(expectedPost);
+		Assert.assertNotNull(expectedLike);
 	}
 	
 	@Test
 	public void testGetId() {
 		// Act
-		final Long result = this.expectedPost.getId();
+		final Long result = this.expectedLike.getId();
 		// Assert
 		Assert.assertEquals(expectedId, result);
 	}
@@ -46,35 +41,17 @@ public class LikeTest {
 	@Test
 	public void testSetId() {
 		// Arrange
-		final Post post = new Post();
+		final Like like = new Like();
 		// Act
-		post.setId(expectedId);
+		like.setId(expectedId);
 		// Assert
-		Assert.assertEquals(expectedId, Long.valueOf(post.getId()));
-	}
-	
-	@Test
-	public void testGetText() {
-		// Act
-		final String result = this.expectedPost.getText();
-		// Assert
-		Assert.assertEquals(expectedText, result);
-	}
-	
-	@Test
-	public void testSetText() {
-		// Arrange
-		final Post post = new Post();
-		// Act
-		post.setText(expectedText);
-		// Assert
-		Assert.assertEquals(expectedText, post.getText());
+		Assert.assertEquals(expectedId, Long.valueOf(like.getId()));
 	}
 	
 	@Test
 	public void testGetCreationDate() {
 		// Act
-		final Date result = this.expectedPost.getCreationDate();
+		final Date result = this.expectedLike.getCreationDate();
 		// Assert
 		Assert.assertEquals(expectedCreationDate, result);
 	}
@@ -82,17 +59,17 @@ public class LikeTest {
 	@Test
 	public void testSetCreationDate() {
 		// Arrange
-		final Post post = new Post();
+		final Like like = new Like();
 		// Act
-		post.setCreationDate(expectedCreationDate);
+		like.setCreationDate(expectedCreationDate);
 		// Assert
-		Assert.assertEquals(expectedCreationDate, post.getCreationDate());
+		Assert.assertEquals(expectedCreationDate, like.getCreationDate());
 	}
 	
 	@Test
 	public void testGetType() {
 		// Act
-		final PostType result = this.expectedPost.getType();
+		final LikeType result = this.expectedLike.getType();
 		// Assert
 		Assert.assertEquals(expectedType, result);
 	}
@@ -100,29 +77,11 @@ public class LikeTest {
 	@Test
 	public void testSetType() {
 		// Arrange
-		final Post post = new Post();
+		final Like like = new Like();
 		// Act
-		post.setType(expectedType);
+		like.setType(expectedType);
 		// Assert
-		Assert.assertEquals(expectedType, post.getType());
-	}
-	
-	@Test
-	public void testGetPicture() {
-		// Act
-		final byte[] result = this.expectedPost.getPicture();
-		// Assert
-		Assert.assertEquals(expectedPicture, result);
-	}
-	
-	@Test
-	public void testSetPicture() {
-		// Arrange
-		final Post post = new Post();
-		// Act
-		post.setPicture(expectedPicture);
-		// Assert
-		Assert.assertEquals(expectedPicture, post.getPicture());
+		Assert.assertEquals(expectedType, like.getType());
 	}
 	
 }
