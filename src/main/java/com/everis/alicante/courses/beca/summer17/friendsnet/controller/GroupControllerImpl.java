@@ -1,6 +1,5 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,16 +10,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.PersonGroup;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.Person;
+import com.everis.alicante.courses.beca.summer17.friendsnet.controller.interfaces.GroupController;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.PersonGroup;
 import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.GroupManager;
+import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.PersonManager;
 
 @RestController
 @RequestMapping("/group")
-public class GroupController{
+public class GroupControllerImpl implements GroupController{
 	
 	@Autowired
 	private GroupManager groupManager;
+	
+	@Autowired
+	private PersonManager personManager;
 	
 	@GetMapping
 	public Iterable<PersonGroup> getAll() {
@@ -43,13 +47,14 @@ public class GroupController{
 	}
 	
 	@PostMapping("/{id}/relate")
-	public Person relatePersons(@PathVariable Long id,@RequestBody List<Person> persons) {
-		return null;
+	public Person relatePersons(@PathVariable Long id,@RequestBody Iterable<Long> newFriendsIds) {
+		return personManager.relatePersons(id, newFriendsIds);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void remove(@PathVariable Long id) {
 		this.groupManager.remove(groupManager.findById(id));
 	}
+
 
 }

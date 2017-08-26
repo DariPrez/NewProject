@@ -45,6 +45,10 @@ public abstract class AbstractDAO<E extends FNEntity, ID extends Serializable> i
 		return entityManager.find(persistentClass, id);
 	}
 	
+	public Iterable<E> findByIds(Iterable<ID> ids) {
+		return (Iterable<E>) entityManager.find(persistentClass, ids);
+	}
+	
 	public E save(E e) {
 		entityManager.persist(e);
 		return e;

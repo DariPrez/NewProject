@@ -2,7 +2,7 @@ package com.everis.alicante.courses.beca.summer17.friendsnet.manager;
 import java.io.Serializable;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.FNEntity;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.Person;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
 
 public interface Manager<E extends FNEntity, ID extends Serializable> {
 

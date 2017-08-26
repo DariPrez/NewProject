@@ -1,6 +1,5 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.Person;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.PersonGroup;
+import com.everis.alicante.courses.beca.summer17.friendsnet.controller.interfaces.PersonController;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
 import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.PersonManager;
 
 @RestController
 @RequestMapping("/person")
-public class PersonController{
+public class PersonControllerImpl implements PersonController{
 	
 	@Autowired
 	private PersonManager manager;
@@ -38,8 +37,8 @@ public class PersonController{
 	}
 
 	@PostMapping("/{id}/relate")
-	public Person relatePersons(@PathVariable Long id,@RequestBody List<Person> persons) {
-		return null;
+	public Person relatePersons(@PathVariable Long id,@RequestBody Iterable<Long> newFriendsIds) {
+		return this.manager.relatePersons(id, newFriendsIds);
 	}
 	
 	@DeleteMapping("/{id}")

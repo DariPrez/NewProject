@@ -1,12 +1,19 @@
-package com.everis.alicante.courses.beca.summer17.friendsnet.entity;
+package com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes;
+
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.FNEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +38,13 @@ public class Person implements FNEntity {
 	@Column(nullable = false)
 	private byte[] picture;
 
+	@OneToMany(mappedBy = "persons", fetch = FetchType.LAZY)
+	//@Getter(lazy = true)
+	@JsonIgnore
+	private Set<Person> persons;
+	
+	
+	
 //	@OneToMany(mappedBy = "Group", fetch = FetchType.EAGER)
 //	private Iterable<Group> groups;
 //
