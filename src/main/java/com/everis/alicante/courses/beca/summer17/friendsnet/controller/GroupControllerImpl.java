@@ -41,7 +41,7 @@ public class GroupControllerImpl implements GroupController{
 		return this.groupManager.save(e);
 	}
 	
-	@GetMapping("/{idperson}")
+	@GetMapping("/person/{id}")
 	public PersonGroup getByPersonId(@PathVariable Long id) {
 		return null;
 	}
