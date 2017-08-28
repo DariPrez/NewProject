@@ -53,6 +53,12 @@ public class PostManagerImpl implements PostManager {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Iterable<Post> findByIds(Iterable<Long> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 

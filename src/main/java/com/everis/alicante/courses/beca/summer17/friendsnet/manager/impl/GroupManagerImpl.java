@@ -55,6 +55,12 @@ public class GroupManagerImpl implements GroupManager {
 		return null;
 	}
 
+	@Override
+	public Iterable<Group> findByIds(Iterable<Long> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

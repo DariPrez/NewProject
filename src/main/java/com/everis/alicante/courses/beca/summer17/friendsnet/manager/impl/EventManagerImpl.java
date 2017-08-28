@@ -47,6 +47,12 @@ public class EventManagerImpl implements EventManager {
 	public void remove(Event e) {
 		eventDao.remove(e);
 	}
+
+	@Override
+	public Iterable<Event> findByIds(Iterable<Long> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 
