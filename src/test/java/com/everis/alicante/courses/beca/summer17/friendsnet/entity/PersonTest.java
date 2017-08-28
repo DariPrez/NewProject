@@ -23,7 +23,7 @@ public class PersonTest {
 		this.expectedPerson.setId(expectedId);
 		this.expectedPerson.setName(expectedName);
 		this.expectedPerson.setSurname(expectedSurname);
-		this.expectedPerson.setPersons(expectedPersons);
+		this.expectedPerson.setFriends(expectedPersons);
 		this.expectedPerson.setPicture(expectedPicture);
 		}
 	
@@ -105,22 +105,5 @@ public class PersonTest {
 		Assert.assertEquals(expectedPicture, person.getPicture());
 	}
 	
-	@Test
-	public void testGetPersons() {
-		// Act
-		final Set<Person> result = this.expectedPerson.getPersons();
-		// Assert
-		Assert.assertEquals(expectedPersons, result);
-	}
-	
-	@Test
-	public void testSetPersons() {
-		// Arrange
-		final Person person = new Person();
-		// Act
-		person.setPersons(expectedPersons);
-		// Assert
-		Assert.assertEquals(expectedPersons, person.getPersons());
-	}
 	
 }

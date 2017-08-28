@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Like;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Post;
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.enums.LikeType;
 
 public class LikeTest {
@@ -15,6 +17,8 @@ public class LikeTest {
 	private Long expectedId = (long) 123;
 	private Date expectedCreationDate = null;
 	private LikeType expectedType = LikeType.COOL;
+	private Person expectedLikeOfPerson = new Person();
+	private Post expectedLikeOfPost = new Post();
 	
 	@Before
 	public void init() {
@@ -22,6 +26,8 @@ public class LikeTest {
 		this.expectedLike.setId(expectedId);
 		this.expectedLike.setCreationDate(expectedCreationDate);
 		this.expectedLike.setType(expectedType);
+		this.expectedLike.setLikeOfPerson(expectedLikeOfPerson);
+		this.expectedLike.setLikeOfPost(expectedLikeOfPost);
 		}
 	
 	@Test
@@ -82,6 +88,43 @@ public class LikeTest {
 		like.setType(expectedType);
 		// Assert
 		Assert.assertEquals(expectedType, like.getType());
+	}
+	
+	
+	@Test
+	public void testGetLikeOfPerson() {
+		// Act
+		final Person result = this.expectedLike.getLikeOfPerson();
+		// Assert
+		Assert.assertEquals(expectedLikeOfPerson, result);
+	}
+	
+	@Test
+	public void testSetLikeOfPerson() {
+		// Arrange
+		final Like like = new Like();
+		// Act
+		like.setLikeOfPerson(expectedLikeOfPerson);
+		// Assert
+		Assert.assertEquals(expectedLikeOfPerson, like.getLikeOfPerson());
+	}
+	
+	@Test
+	public void testGetLikeOfPost() {
+		// Act
+		final Post result = this.expectedLike.getLikeOfPost();
+		// Assert
+		Assert.assertEquals(expectedLikeOfPost, result);
+	}
+	
+	@Test
+	public void testSetLikeOfPost() {
+		// Arrange
+		final Like like = new Like();
+		// Act
+		like.setLikeOfPost(expectedLikeOfPost);
+		// Assert
+		Assert.assertEquals(expectedLikeOfPost, like.getLikeOfPost());
 	}
 	
 }

@@ -1,6 +1,8 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.controller.impl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +39,7 @@ public class PersonControllerImpl implements PersonController{
 	}
 
 	@PostMapping("/{id}/relate")
-	public Person relatePersons(@PathVariable Long id,@RequestBody Iterable<Long> newFriendsIds) {
+	public Person relatePersons(@PathVariable Long id,@RequestBody List<Long> newFriendsIds) {
 		return this.manager.relatePersons(id, newFriendsIds);
 	}
 	

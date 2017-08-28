@@ -23,6 +23,8 @@ import lombok.Setter;
 @Table(name = "PersonGroup")
 public class Group implements FNEntity{
 
+	private static final long serialVersionUID = -1471396161177406387L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(unique = true, nullable = false)
@@ -34,5 +36,8 @@ public class Group implements FNEntity{
 	@Column(nullable = false)
 	private byte[] picture;
 
+	@ManyToOne(cascade = { CascadeType.MERGE })
+	@JoinColumn(name = "person_id", nullable = false)
+	private Person personInGroup;
 
 }

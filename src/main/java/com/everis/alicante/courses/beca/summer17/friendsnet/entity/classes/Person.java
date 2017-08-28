@@ -1,5 +1,6 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.FNEntity;
@@ -24,6 +26,8 @@ import lombok.Setter;
 @Table(name = "Person")
 public class Person implements FNEntity {
 
+	private static final long serialVersionUID = 6927031832679769122L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(unique = true, nullable = false)
@@ -37,25 +41,32 @@ public class Person implements FNEntity {
 	@Lob
 	@Column(nullable = false)
 	private byte[] picture;
-
-	@OneToMany(mappedBy = "persons", fetch = FetchType.LAZY)
-	//@Getter(lazy = true)
+	
+	@OneToMany(mappedBy = "personInGroup", fetch = FetchType.EAGER)
 	@JsonIgnore
-	private Set<Person> persons;
+	private Set<Group> groups = new HashSet<>();
+
+	@OneToMany(mappedBy = "friends", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private Set<Person> friends = new HashSet<>();
+
+	@OneToOne(mappedBy = "likeOfPerson", fetch = FetchType.EAGER)
+	@JsonIgnore
+	private Like liker;
+
+	@OneToOne(mappedBy = "postWritter", fetch = FetchType.EAGER)
+	@JsonIgnore
+	private Post postWritter;
+
+	@OneToMany(mappedBy = "personInEvent", fetch = FetchType.EAGER)
+	@JsonIgnore
+	private Set<Event> events = new HashSet<>();
 	
-	
-	
-//	@OneToMany(mappedBy = "Group", fetch = FetchType.EAGER)
-//	private Iterable<Group> groups;
-//
-//	@OneToMany(mappedBy = "Person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	private Set<Person> friends;
-//
-//	public Set<Person> getFriends() {
-//		if (this.friends == null) {
-//			this.friends = new HashSet();
-//		}
-//		return this.friends;
-//	}
+	public Set<Person> getFriends() {
+	if (this.friends == null) {
+		this.friends = new HashSet<Person>();
+	}
+	return this.friends;
+}
 
 }

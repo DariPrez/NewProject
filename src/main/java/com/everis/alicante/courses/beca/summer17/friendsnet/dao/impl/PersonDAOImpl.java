@@ -11,11 +11,4 @@ import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Perso
 @Service
 public class PersonDAOImpl extends AbstractDAO<Person, Long> implements PersonDAO{
 
-	@Override
-	public Person relatePerson(Long id, List<Person> persons) {
-		
-		return null;
-	}
-
-
 }

@@ -5,6 +5,9 @@ import java.util.Date;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Event;
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.enums.EventType;

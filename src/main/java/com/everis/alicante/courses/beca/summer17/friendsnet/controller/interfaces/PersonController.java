@@ -1,6 +1,8 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.controller.interfaces;
 
 
+import java.util.List;
+
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
 
 public interface PersonController {
@@ -11,7 +13,7 @@ public interface PersonController {
 	
 	public Person create(Person e);
 	
-	public Person relatePersons(Long id,Iterable<Long> newFriendsIds);
+	public Person relatePersons(Long id, List<Long> newFriendsIds);
 	
 	public void remove(Long id);
 	
