@@ -54,7 +54,7 @@ public class Post implements FNEntity{
 	private PostType type;
 	
 	@Lob
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private byte[] picture;
 	
 	@OneToOne(mappedBy = "likeOfPerson", fetch = FetchType.EAGER)
@@ -62,12 +62,12 @@ public class Post implements FNEntity{
 	private Like postOfLike;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "post_id", nullable = false)
+	@JoinColumn(name = "post_id", nullable = true)
 	@JsonIgnore
 	private Person postWritter;
 
 	@ManyToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "event_id", nullable = false)
+	@JoinColumn(name = "event_id", nullable = true)
 	@JsonIgnore
 	private Event postInEvent;
 	

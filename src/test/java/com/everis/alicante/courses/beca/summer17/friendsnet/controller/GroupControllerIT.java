@@ -36,18 +36,34 @@ public class GroupControllerIT {
     }
 
     @Test
-    @DatabaseSetup("classpath:db/initial-group.xml")
+    @DatabaseSetup("classpath:db/empty-group.xml")
     public void testFindAllNoContent() throws JSONException {
         //Arrange
         HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
         // Act
         ResponseEntity<String> response = restTemplate.exchange(
-                createURLWithPort("/person"),
+                createURLWithPort("/group"),
                 HttpMethod.GET, null, String.class);
 
         // Assert
         JSONAssert.assertEquals("[]", response.getBody(), false);
+    }
+    
+
+    @Test
+    @DatabaseSetup("classpath:db/initial-group.xml")
+    public void testFindAllWithContent() throws JSONException {
+        //Arrange
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+
+        // Act
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/group"),
+                HttpMethod.GET, null, String.class);
+
+        // Assert
+        JSONAssert.assertEquals("[{'id': 1, 'name':'Venezolanos'}, {'id': 2, 'name':''}]", response.getBody(), false);
     }
 
     private String createURLWithPort(String uri) {

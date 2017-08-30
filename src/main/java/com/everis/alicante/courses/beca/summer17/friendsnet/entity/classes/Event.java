@@ -59,7 +59,7 @@ public class Event implements FNEntity{
 	private EventType type;
 	
 	@Lob
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private byte[] picture;
 
 	@OneToMany(mappedBy = "postInEvent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -67,7 +67,7 @@ public class Event implements FNEntity{
 	private Set<Post> posts = new HashSet<>();
 
 	@ManyToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "person_id", nullable = false)
+	@JoinColumn(name = "person_id", nullable = true)
 	@JsonIgnore
 	private Person personInEvent;
 	

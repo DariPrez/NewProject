@@ -48,7 +48,7 @@ public class Like implements FNEntity {
 	private LikeType type;
 
 	@Lob
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private byte[] picture;
 
 	@OneToOne(fetch = FetchType.EAGER)

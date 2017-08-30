@@ -5,6 +5,6 @@ import org.junit.runners.Suite;
 /**
  * Created by emingora on 28/08/2017.
  */
-@Suite.SuiteClasses({PersonControllerIT.class})
+@Suite.SuiteClasses({PersonControllerIT.class, GroupControllerIT.class})
 public class WholeIntegrationTesting {
 }

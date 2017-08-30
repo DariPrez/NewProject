@@ -1,76 +1,72 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import com.everis.alicante.courses.beca.summer17.friendsnet.controller.interfaces.PersonController;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
-import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.PersonManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PersonControllerIT {
 
-	@InjectMocks
-    private PersonController personController;
+    @LocalServerPort
+    private int port;
 
-    @Mock
-    private PersonManager personManager;
+    TestRestTemplate restTemplate = new TestRestTemplate();
 
-    private MockMvc mockMvc;
+    HttpHeaders headers = new HttpHeaders();
 
     private ObjectMapper mapper;
 
-
     @Before
     public void setup() {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
         this.mapper = new ObjectMapper();
     }
 
     @Test
-    public void testGetAllNoContent() throws Exception {
-        // Arrange
-        Mockito.when(personManager.findAll()).thenReturn(null);
-        // Act
-        ResultActions perform = mockMvc.perform(get("/person"));
-        // Assert
-        perform.andExpect(status().isOk());
-    }
+    @DatabaseSetup("classpath:db/empty-group.xml")
+    public void testFindAllNoContent() throws JSONException {
+        //Arrange
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
+        // Act
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/group"),
+                HttpMethod.GET, null, String.class);
+
+        // Assert
+        JSONAssert.assertEquals("[]", response.getBody(), false);
+    }
+    
 
     @Test
-    public void testGetAllWithContent() throws Exception {
-        // Arrange
-        Person persona = new Person();
-        persona.setName("pepe");
-        Person personb = new Person();
-        personb.setName("juan");
-        List<Person> persons = new ArrayList<>();
-        persons.add(persona);
-        persons.add(personb);
-        Mockito.when(personManager.findAll()).thenReturn(persons);
+    @DatabaseSetup("classpath:db/initial-person.xml")
+    public void testFindAllWithContent() throws JSONException {
+        //Arrange
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+
         // Act
-        ResultActions perform = mockMvc.perform(get("/person"));
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/person"),
+                HttpMethod.GET, null, String.class);
+
         // Assert
-        perform.andExpect(status().isOk());
-        perform.andExpect(content().json(mapper.writeValueAsString(persons)));
+        JSONAssert.assertEquals("[{'id': 1, 'name':'Maria', 'surname':'Lopez'}, {'id': 2, 'name':'Daria', 'surname':'Perez'}]", response.getBody(), false);
+    }
+
+    private String createURLWithPort(String uri) {
+        return "http://localhost:" + port + uri;
     }
 }
