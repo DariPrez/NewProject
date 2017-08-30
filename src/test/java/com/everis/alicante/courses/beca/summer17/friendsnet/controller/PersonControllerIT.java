@@ -3,6 +3,8 @@ package com.everis.alicante.courses.beca.summer17.friendsnet.controller;
 import com.everis.alicante.courses.beca.summer17.friendsnet.dao.interfaces.PersonDAO;
 import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,26 +40,21 @@ public class PersonControllerIT {
     public void setup() {
 
         this.mapper = new ObjectMapper();
-        Iterable<Person> all = dao.findAll();
-//        for(Person person: all) {
-//            dao.remove(person);
-//        }
     }
 
 
     @Test
-    public void testFindAllNoContent() throws JSONException {
-        //Arrange
-        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
-
-        // Act
-        ResponseEntity<String> response = restTemplate.exchange(
-                createURLWithPort("/person"),
-                HttpMethod.GET, null, String.class);
-
-        // Assert
-        JSONAssert.assertEquals("[]", response.getBody(), false);
-    }
+	@DatabaseSetup("classpath:/initial-person.xml")
+	public void testFindAll() throws JSONException {
+		// Act
+		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/person"), HttpMethod.GET, null,
+				String.class);
+		// Assert
+		JSONAssert.assertEquals(
+				"[{'id':1, 'name':'Antonio', 'picture':[null], 'surname':'Sanchez'},"
+				+ "{'id'=2, 'name'='Fran', 'picture':[null], 'surname':'Periago'}]",
+				response.getBody(), false);
+	}
 
     @Test
     public void testFindAllWithContent() throws JSONException {

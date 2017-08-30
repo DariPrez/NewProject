@@ -1,7 +1,8 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.controller;
 
-import com.everis.alicante.courses.beca.summer17.friendsnet.FriendsnetApplication;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -36,6 +36,7 @@ public class GroupControllerIT {
     }
 
     @Test
+    @DatabaseSetup("classpath:db/initial-group.xml")
     public void testFindAllNoContent() throws JSONException {
         //Arrange
         HttpEntity<String> entity = new HttpEntity<String>(null, headers);

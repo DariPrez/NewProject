@@ -39,7 +39,7 @@ public class Person implements FNEntity {
 	@Column(nullable = false, length = 255)
 	private String surname;
 	@Lob
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private byte[] picture;
 	
 	@OneToMany(mappedBy = "personInGroup", fetch = FetchType.EAGER)

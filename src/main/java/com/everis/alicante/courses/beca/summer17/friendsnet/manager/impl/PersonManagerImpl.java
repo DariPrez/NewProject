@@ -1,5 +1,6 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.manager.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -58,10 +59,12 @@ public class PersonManagerImpl implements PersonManager {
 
 	@Override
 	public Person relatePersons(Long id, List<Long> newFriendsIds) {
-		Person person = personDao.findById(id);
-		List<Person> friends = (List<Person>) personDao.findByIds(newFriendsIds);
-		person.getFriends().addAll(friends);
-		return personDao.save(person);
+        Person person = this.findById(id);
+        List<Person> persons = new ArrayList<Person>();
+        personDao.findByIds(newFriendsIds).forEach(persons::add);
+        person.getFriends().addAll(persons);
+        personDao.update(person);
+        return person;
 	}
 
 }
