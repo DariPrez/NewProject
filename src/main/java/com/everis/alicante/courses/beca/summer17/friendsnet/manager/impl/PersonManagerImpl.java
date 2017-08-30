@@ -1,8 +1,6 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.manager.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +26,8 @@ public class PersonManagerImpl implements PersonManager {
 	}
 	
 	@Override
-	public Iterable<Person> findByIds(Iterable<Long> ids) {
-		return personDao.findByIds(ids);
+	public Iterable<Person> findAll(Iterable<Long> ids) {
+		return personDao.findAll(ids);
 	}
 
 	@Override
@@ -59,12 +57,13 @@ public class PersonManagerImpl implements PersonManager {
 
 	@Override
 	public Person relatePersons(Long id, List<Long> newFriendsIds) {
-        Person person = this.findById(id);
-        List<Person> persons = new ArrayList<Person>();
-        personDao.findByIds(newFriendsIds).forEach(persons::add);
-        person.getFriends().addAll(persons);
-        personDao.update(person);
-        return person;
+//        Person person = this.findById(id);
+//        List<Person> persons = new ArrayList<Person>();
+//        personDao.findByIds(newFriendsIds).forEach(persons::add);
+//        person.getFriends().addAll(persons);
+//        personDao.update(person);
+//		  return person;
+        return null;
 	}
 
 }

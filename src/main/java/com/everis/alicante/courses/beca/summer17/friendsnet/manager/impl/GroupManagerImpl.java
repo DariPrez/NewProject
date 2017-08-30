@@ -56,9 +56,8 @@ public class GroupManagerImpl implements GroupManager {
 	}
 
 	@Override
-	public Iterable<Group> findByIds(Iterable<Long> ids) {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterable<Group> findAll(Iterable<Long> ids) {
+		return groupDao.findAll(ids);
 	}
 
 	

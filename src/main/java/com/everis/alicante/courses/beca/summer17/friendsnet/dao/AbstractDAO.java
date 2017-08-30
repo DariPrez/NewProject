@@ -45,7 +45,7 @@ public abstract class AbstractDAO<E extends FNEntity, ID extends Serializable> i
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Iterable<E> findByIds(Iterable<ID> ids) {
+	public Iterable<E> findAll(Iterable<ID> ids) {
 		return (Iterable<E>) entityManager.find(persistentClass, ids);
 	}
 	

@@ -1,7 +1,5 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.dao.impl;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.everis.alicante.courses.beca.summer17.friendsnet.dao.AbstractDAO;

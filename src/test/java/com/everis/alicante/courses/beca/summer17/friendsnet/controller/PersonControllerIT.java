@@ -1,82 +1,76 @@
 package com.everis.alicante.courses.beca.summer17.friendsnet.controller;
 
-import com.everis.alicante.courses.beca.summer17.friendsnet.dao.interfaces.PersonDAO;
-import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.springtestdbunit.annotation.DatabaseSetup;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.json.JSONException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.skyscreamer.jsonassert.JSONAssert;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.LocalServerPort;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+import com.everis.alicante.courses.beca.summer17.friendsnet.controller.interfaces.PersonController;
+import com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes.Person;
+import com.everis.alicante.courses.beca.summer17.friendsnet.manager.interfaces.PersonManager;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
 public class PersonControllerIT {
 
-    @LocalServerPort
-    private int port;
+	@InjectMocks
+    private PersonController personController;
 
-    @Autowired
-    private PersonDAO dao;
+    @Mock
+    private PersonManager personManager;
 
-    TestRestTemplate restTemplate = new TestRestTemplate();
-
-    HttpHeaders headers = new HttpHeaders();
+    private MockMvc mockMvc;
 
     private ObjectMapper mapper;
 
+
     @Before
     public void setup() {
-
+        this.mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
         this.mapper = new ObjectMapper();
     }
 
-
     @Test
-	@DatabaseSetup("classpath:/initial-person.xml")
-	public void testFindAll() throws JSONException {
-		// Act
-		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/person"), HttpMethod.GET, null,
-				String.class);
-		// Assert
-		JSONAssert.assertEquals(
-				"[{'id':1, 'name':'Antonio', 'picture':[null], 'surname':'Sanchez'},"
-				+ "{'id'=2, 'name'='Fran', 'picture':[null], 'surname':'Periago'}]",
-				response.getBody(), false);
-	}
-
-    @Test
-    public void testFindAllWithContent() throws JSONException {
-        //Arrange
-        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
-        Person person1 = new Person();
-        person1.setName("Pepe");
-        person1.setName("Gomez");
-        person1.setPicture(null);
-        dao.save(person1);
-
-
+    public void testGetAllNoContent() throws Exception {
+        // Arrange
+        Mockito.when(personManager.findAll()).thenReturn(null);
         // Act
-        ResponseEntity<String> response = restTemplate.exchange(
-                createURLWithPort("/person"),
-                HttpMethod.GET, null, String.class);
-
+        ResultActions perform = mockMvc.perform(get("/person"));
         // Assert
-        JSONAssert.assertEquals("[{ 'name':'Pepe', 'surname':'Gomez'}]", response.getBody(), false);
+        perform.andExpect(status().isOk());
     }
 
-    private String createURLWithPort(String uri) {
-        return "http://localhost:" + port + uri;
+
+    @Test
+    public void testGetAllWithContent() throws Exception {
+        // Arrange
+        Person persona = new Person();
+        persona.setName("pepe");
+        Person personb = new Person();
+        personb.setName("juan");
+        List<Person> persons = new ArrayList<>();
+        persons.add(persona);
+        persons.add(personb);
+        Mockito.when(personManager.findAll()).thenReturn(persons);
+        // Act
+        ResultActions perform = mockMvc.perform(get("/person"));
+        // Assert
+        perform.andExpect(status().isOk());
+        perform.andExpect(content().json(mapper.writeValueAsString(persons)));
     }
 }

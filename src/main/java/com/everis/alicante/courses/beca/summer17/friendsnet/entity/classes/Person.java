@@ -3,6 +3,7 @@ package com.everis.alicante.courses.beca.summer17.friendsnet.entity.classes;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,7 +43,7 @@ public class Person implements FNEntity {
 	@Column(nullable = true)
 	private byte[] picture;
 	
-	@OneToMany(mappedBy = "personInGroup", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "personInGroup", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<Group> groups = new HashSet<>();
 

@@ -10,7 +10,7 @@ public interface EntityDAO<E extends FNEntity, ID extends Serializable> {
 	
 	E findById(ID id);
 	
-	Iterable<E> findByIds(Iterable<ID> ids);
+	Iterable<E> findAll(Iterable<ID> ids);
 	
 	E save(E e);
 	

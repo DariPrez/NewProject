@@ -55,9 +55,8 @@ public class PostManagerImpl implements PostManager {
 	}
 
 	@Override
-	public Iterable<Post> findByIds(Iterable<Long> ids) {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterable<Post> findAll(Iterable<Long> ids) {
+		return postDao.findAll(ids);
 	}
 	
 
